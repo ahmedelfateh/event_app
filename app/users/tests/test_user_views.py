@@ -11,9 +11,8 @@ from app.users.views import (
     user_detail_view,
 )
 
-pytestmark = pytest.mark.django_db
 
-
+@pytest.mark.django_db
 class TestUserUpdateView:
     def test_get_success_url(self, user: User, rf: RequestFactory):
         view = UserUpdateView()
@@ -34,6 +33,7 @@ class TestUserUpdateView:
         assert view.get_object() == user
 
 
+@pytest.mark.django_db
 class TestUserRedirectView:
     def test_get_redirect_url(self, user: User, rf: RequestFactory):
         view = UserRedirectView()
@@ -45,6 +45,7 @@ class TestUserRedirectView:
         assert view.get_redirect_url() == f"/users/{user.id}/"
 
 
+@pytest.mark.django_db
 class TestUserDetailView:
     def test_authenticated(self, user: User, rf: RequestFactory):
         request = rf.get("/fake-url/")
@@ -56,7 +57,7 @@ class TestUserDetailView:
 
     def test_not_authenticated(self, user: User, rf: RequestFactory):
         request = rf.get("/fake-url/")
-        request.user = AnonymousUser()  # type: ignore
+        request.user = AnonymousUser()
 
         response = user_detail_view(request, pk=user.id)
 

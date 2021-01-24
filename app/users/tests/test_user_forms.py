@@ -1,11 +1,9 @@
 import pytest
-
-from app.users.admin import UserCreationForm
 from app.users.tests.factories import UserFactory
+from app.users.forms import UserCreationForm
 
-pytestmark = pytest.mark.django_db
 
-
+@pytest.mark.django_db
 class TestUserCreationForm:
     def test_clean_email(self):
         # A user with proto_user params does not exist yet.

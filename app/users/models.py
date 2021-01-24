@@ -23,6 +23,11 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
+    """
+    User Model
+
+    Extended from the AbstractUser of Django
+    """
 
     username = None  # type: ignore
     email = models.EmailField("Email", blank=True, unique=True)
@@ -30,7 +35,7 @@ class User(AbstractUser):
     objects = UserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = []  # type: ignore
 
     class Meta:
         ordering = ["email"]
@@ -46,7 +51,7 @@ class User(AbstractUser):
 
     @property
     def is_email_verified(self):
-        return self.emailaddress_set.filter(email=self.email, verified=True).exists()
+        return self.emailaddress_set.filter(email=self.email, verified=True).exists()  # type: ignore
 
     @property
     def event_created(self):

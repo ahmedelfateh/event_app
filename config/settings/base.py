@@ -60,6 +60,7 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
+    "nucleus",
     "django.contrib.admin",
     "django.forms",
 ]
@@ -182,6 +183,7 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
                 "app.utils.context_processors.settings_context",
+                "nucleus.context_processors.nucleus",
             ],
         },
     }

@@ -25,9 +25,8 @@ class EventDetailView(DetailView):
 
 class EventCreateView(LoginRequiredMixin, CreateView):
     model = Event
-    fields = "__all__"
-    fields = ["title", "description", "date"]
-    template_name = "pages/event_form.html"
+    template_name = "pages/add_event.html"
+    form_class = EventForm
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
@@ -76,7 +75,7 @@ def EventUpdateView(request, pk):
         form.save()
         return HttpResponseRedirect("/")
     context["form"] = form
-    template_name = "pages/event_form.html"
+    template_name = "pages/edit_event.html"
     messages.success(request, f"You Updated {event.title}")
     return render(request, template_name, context)
 
@@ -87,11 +86,11 @@ def EventDeleteView(request, pk):
     if request.user != event.owner:
         return redirect("events:add")
 
-    context = {}
+    context = {}  # type: ignore
     event = get_object_or_404(Event, id=pk)
     if request.method == "POST":
         event.delete()
         return HttpResponseRedirect("/")
-    template_name = "pages/event_confirm_delete.html"
+    template_name = "pages/event_delete.html"
     messages.warning(request, f"You Going to Deleted {event.title}")
     return render(request, template_name, context)

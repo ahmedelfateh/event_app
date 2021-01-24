@@ -1,22 +1,18 @@
-from typing import Any, Sequence
-
-from django.contrib.auth import get_user_model
-from factory import Faker
+from factory import Sequence, SubFactory
+from django.utils import timezone
+from dateutil.relativedelta import relativedelta
 from factory.django import DjangoModelFactory
 from app.events.models import Event
+from app.users.tests.factories import UserFactory
 
 
 class EventFactory(DjangoModelFactory):
 
-    email = Faker("email")
-    password = Faker(
-        "password",
-        length=42,
-        special_chars=True,
-        digits=True,
-        upper_case=True,
-        lower_case=True,
-    )
+    owner = SubFactory(UserFactory)
+    title = Sequence(lambda n: "event {0}".format(n))
+    description = Sequence(lambda n: "event {0}".format(n))
+    date = timezone.now() + relativedelta(months=6)
+    # participants = SubFactory(UserFactory)
 
     class Meta:
         model = Event

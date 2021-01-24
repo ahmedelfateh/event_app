@@ -23,7 +23,9 @@
     role="button"
     >Delete Event</a
   >
-  {% endif %} {% if request.user in event.participants_users %}
+  {% endif %} 
+  {% if request.user.is_authenticated %}
+  {% if request.user in event.participants_users %}
   <a
     class="btn btn-primary"
     href="{% url 'events:addparticipant' event.id %}"
@@ -37,6 +39,7 @@
     role="button"
     >Going</a
   >
+  {% endif %}
   {% endif %}
 </ul>
 

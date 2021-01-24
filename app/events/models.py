@@ -1,5 +1,6 @@
 from django.db import models
-from django.shortcuts import reverse
+from django.urls import reverse
+from app.users.models import User
 
 # Create your models here.
 
@@ -7,12 +8,12 @@ from django.shortcuts import reverse
 class Event(models.Model):
 
     owner = models.ForeignKey(
-        "users.User", related_name="owner", on_delete=models.PROTECT
+        User, related_name="owner", on_delete=models.PROTECT, blank=True, null=True
     )
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=200)
     date = models.DateField()
-    participants = models.ManyToManyField("users.User", "participants", blank=True)
+    participants = models.ManyToManyField(User, "participants", blank=True)
 
     class Meta:
         verbose_name = "Event"

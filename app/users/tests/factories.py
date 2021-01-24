@@ -1,21 +1,15 @@
-from typing import Any, Sequence
-
-from django.contrib.auth import get_user_model
-from factory import Faker, post_generation
+import factory
+from factory import Faker
 from factory.django import DjangoModelFactory
+from django.contrib.auth import get_user_model
+from django.db.models.signals import post_save
 
 
+@factory.django.mute_signals(post_save)
 class UserFactory(DjangoModelFactory):
 
     email = Faker("email")
-    password = Faker(
-        "password",
-        length=42,
-        special_chars=True,
-        digits=True,
-        upper_case=True,
-        lower_case=True,
-    )
+    password = Faker("password")
 
     class Meta:
         model = get_user_model()
