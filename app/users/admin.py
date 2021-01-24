@@ -6,6 +6,10 @@ from .forms import UserChangeForm, UserCreationForm
 
 
 class EmailsInline(admin.TabularInline):
+    """[summary]
+    Admin view for the allauth package email model
+    """
+
     model = EmailAddress
     readonly_fields = ["user"]
     max_num = 8
@@ -17,6 +21,10 @@ admin.site.unregister(EmailAddress)
 
 @admin.register(User)
 class UserAdmin(auth_admin.UserAdmin):
+    """[summary]
+    Admin view for the User model
+    """
+
     form = UserChangeForm
     add_form = UserCreationForm
     fieldsets = (

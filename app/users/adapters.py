@@ -11,7 +11,7 @@ class AccountAdapter(DefaultAccountAdapter):
         return getattr(settings, "ACCOUNT_ALLOW_REGISTRATION", True)
 
     def save_user(self, request, user, form, commit=True):
-        """
+        """[summary]
         Saves a new `User` instance using information provided in the
         signup form.
         """

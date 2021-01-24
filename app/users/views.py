@@ -9,10 +9,14 @@ User = get_user_model()
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
-    """
+
+    """[summary]
     UserDetailView -> User Profile
 
     User view his data
+
+    url: /users/<int:pk>/
+    pk = user.id
     """
 
     model = User
@@ -22,10 +26,13 @@ user_detail_view = UserDetailView.as_view()
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
-    """
+
+    """[summary]
     UserUpdateView -> User update
 
     User update his data
+
+    url: /users/~update/
     """
 
     model = User
@@ -50,6 +57,10 @@ user_update_view = UserUpdateView.as_view()
 
 
 class UserRedirectView(LoginRequiredMixin, RedirectView):
+
+    """[summary]
+    url: /users/~update/
+    """
 
     permanent = False
 

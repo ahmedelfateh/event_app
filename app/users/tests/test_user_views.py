@@ -15,6 +15,9 @@ from app.users.views import (
 @pytest.mark.django_db
 class TestUserUpdateView:
     def test_get_success_url(self, user: User, rf: RequestFactory):
+        """[summary]
+        Test UserUpdateView return the correct /users/{user.id}/ (user detail)
+        """
         view = UserUpdateView()
         request = rf.get("/fake-url/")
         request.user = user

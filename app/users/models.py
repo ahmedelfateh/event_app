@@ -6,7 +6,7 @@ from django.urls import reverse
 class UserManager(BaseUserManager):
     # pylint: disable=arguments-differ
     def _create_user(self, username, email, password, **extra_fields):
-        """
+        """[summary]
         Create and save a user with the given username, email, and password.
         """
         email = self.normalize_email(email)
@@ -23,7 +23,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
-    """
+    """[summary]
     User Model
 
     Extended from the AbstractUser of Django
