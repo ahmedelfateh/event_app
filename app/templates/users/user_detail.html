@@ -12,8 +12,23 @@
     <br>
       <h2>{{ object.name }}</h2>
       {% if object.email %}
-        <p>{{ object.email }}</p>
+        <p>Email: {{ object.email }}</p>
       {% endif %}
+      <p>Screen Name: {{object.screen_name}}</p>
+      <p>Events Created:</p>
+      {% for event in object.event_created %}
+      <ul>
+        <li> {{ event.title }} --- {{ event.date }} ---> <a class="btn btn-primary" href="{{ event.get_absolute_url }}" role="button"
+        >Event Detail</a></li>
+      </ul>
+      {% endfor %}
+      <p>Participated Events:</p>
+      {% for event in object.participated_events %}
+      <ul>
+        <li> {{ event.title }} --- {{ event.date }} ---> <a class="btn btn-primary" href="{{ event.get_absolute_url }}" role="button"
+        >Event Detail</a></li>
+      </ul>
+      {% endfor %}
     </div>
   </div>
 

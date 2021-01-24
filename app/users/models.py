@@ -47,3 +47,15 @@ class User(AbstractUser):
     @property
     def is_email_verified(self):
         return self.emailaddress_set.filter(email=self.email, verified=True).exists()
+
+    @property
+    def event_created(self):
+        return self.owner.all()
+
+    @property
+    def screen_name(self):
+        return self.email.split("@")[0]
+
+    @property
+    def participated_events(self):
+        return self.participants.all()

@@ -1,0 +1,10 @@
+{% extends "base.html" %} {% block content %}
+<h1>Event Delete</h1>
+<form method="post">
+  {% csrf_token %} Are you sure you want to delete?
+
+  <button class="btn btn-primary btn-lg btn-block" type="submit" value="Submit">
+    Delete
+  </button>
+</form>
+{% endblock content %}

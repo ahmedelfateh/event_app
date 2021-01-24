@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block content %}
+
+<h1>Event Detail Page</h1>
+
+<li>Event Name: {{ event.title }} - Date: {{ event.date }}</li>
+<ul>
+  <li>Event Creator: {{ event.screen_name }}</li>
+  <li>Event Description: {{ event.description }}</li>
+  <li>Amount of Participants: {{ event.count_participants }}</li>
+
+  <br />
+
+  {% if request.user.is_authenticated and request.user.id is event.owner.id%}
+  <a
+    class="btn btn-primary"
+    href="{% url 'events:update' event.id %}"
+    role="button"
+    >Update Event</a
+  >
+  <a
+    class="btn btn-primary"
+    href="{% url 'events:delete' event.id %}"
+    role="button"
+    >Delete Event</a
+  >
+  {% endif %} {% if request.user in event.participants_users %}
+  <a
+    class="btn btn-primary"
+    href="{% url 'events:addparticipant' event.id %}"
+    role="button"
+    >Ignore</a
+  >
+  {% else %}
+  <a
+    class="btn btn-primary"
+    href="{% url 'events:addparticipant' event.id %}"
+    role="button"
+    >Going</a
+  >
+  {% endif %}
+</ul>
+
+{% endblock content %}

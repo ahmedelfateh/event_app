@@ -1,1 +1,31 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<h1>Event List</h1>
+<br />
+{% for event in page_obj%}
+<li>Event Name: {{ event.title }} - Date: {{ event.date }}</li>
+<ul>
+  <li>Event Creator: {{ event.screen_name }}</li>
+  <li>Amount of Participants: {{ event.count_participants }}</li>
+  <a class="btn btn-primary" href="{{ event.get_absolute_url }}" role="button"
+    >Event Detail</a
+  >
+</ul>
+{% endfor %}
+
+<div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+    </span>
+
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">next</a>
+    {% endif %}
+  </span>
+</div>
+
+{% endblock content %}
