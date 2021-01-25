@@ -9,6 +9,7 @@ class TestUserCreationForm:
         """[summary]
         Test user create form
         """
+
         # A user with proto_user params does not exist yet.
         proto_user = UserFactory.build()
 

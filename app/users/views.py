@@ -9,7 +9,6 @@ User = get_user_model()
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
-
     """[summary]
     UserDetailView -> User Profile
 
@@ -26,7 +25,6 @@ user_detail_view = UserDetailView.as_view()
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
-
     """[summary]
     UserUpdateView -> User update
 
@@ -57,7 +55,6 @@ user_update_view = UserUpdateView.as_view()
 
 
 class UserRedirectView(LoginRequiredMixin, RedirectView):
-
     """[summary]
     url: /users/~update/
     """

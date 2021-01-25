@@ -9,6 +9,7 @@ def test_detail(user: User):
     """[summary]
     Test /users/{user.id}/ return the correct view ("users:detail")
     """
+
     assert reverse("users:detail", kwargs={"pk": user.pk}) == f"/users/{user.id}/"
     assert resolve(f"/users/{user.id}/").view_name == "users:detail"
 
@@ -18,6 +19,7 @@ def test_update():
     """[summary]
     Test /users/~update/ return the correct view ("users:update")
     """
+
     assert reverse("users:update") == "/users/~update/"
     assert resolve("/users/~update/").view_name == "users:update"
 
@@ -27,5 +29,6 @@ def test_redirect():
     """[summary]
     Test /users/~redirect/ return the correct view (users:redirect)
     """
+
     assert reverse("users:redirect") == "/users/~redirect/"
     assert resolve("/users/~redirect/").view_name == "users:redirect"

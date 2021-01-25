@@ -1,6 +1,5 @@
 import pytest
 from django.contrib.auth.models import AnonymousUser
-from django.http.response import Http404
 from django.test import RequestFactory
 
 from app.users.models import User
@@ -18,6 +17,7 @@ class TestUserUpdateView:
         """[summary]
         Test UserUpdateView return the correct /users/{user.id}/ (user detail)
         """
+
         view = UserUpdateView()
         request = rf.get("/fake-url/")
         request.user = user
@@ -51,6 +51,10 @@ class TestUserRedirectView:
 @pytest.mark.django_db
 class TestUserDetailView:
     def test_authenticated(self, user: User, rf: RequestFactory):
+        """[summary]
+        Test Login user can see /users/{user.id}/ (user detail)
+        """
+
         request = rf.get("/fake-url/")
         request.user = UserFactory()
 
@@ -59,6 +63,10 @@ class TestUserDetailView:
         assert response.status_code == 200
 
     def test_not_authenticated(self, user: User, rf: RequestFactory):
+        """[summary]
+        Test anonymous user can see /users/{user.id}/ (user detail)
+        """
+
         request = rf.get("/fake-url/")
         request.user = AnonymousUser()
 

@@ -18,7 +18,7 @@ RUN apt-get update \
 COPY ./requirements /requirements
 RUN pip install -r /requirements/local.txt
 
-COPY ./docker/django/*.sh /
+COPY ./docker/*.sh /
 RUN sed -i 's/\r$//g' /*.sh
 RUN chmod +x /*.sh
 

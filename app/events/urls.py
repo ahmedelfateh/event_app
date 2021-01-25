@@ -7,7 +7,7 @@ from .views import (
     AddParticipant,
 )
 
-app_name = "orders"
+app_name = "events"
 
 urlpatterns = [
     path("<int:pk>", EventDetailView.as_view(), name="event"),

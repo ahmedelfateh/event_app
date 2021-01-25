@@ -8,6 +8,9 @@ from app.events.tests.factories import EventFactory
 @pytest.mark.django_db
 class TestEventCreationForm:
     def test_create_event(self):
+        """[summary]
+        Test event create form
+        """
 
         event = EventFactory.build()
         user = UserFactory.build()

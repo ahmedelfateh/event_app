@@ -1,11 +1,13 @@
+import datetime
 from django.db import models
 from django.urls import reverse
 from app.users.models import User
 
-# Create your models here.
-
 
 class Event(models.Model):
+    """[summary]
+    Event Model
+    """
 
     owner = models.ForeignKey(
         User, related_name="owner", on_delete=models.PROTECT, blank=True, null=True
@@ -32,8 +34,12 @@ class Event(models.Model):
 
     @property
     def screen_name(self):
-        return self.owner.email.split("@")[0]
+        return self.owner.email.split("@")[0]  # type: ignore
 
     @property
     def participants_users(self):
         return self.participants.all()
+
+    @property
+    def done_event(self):
+        return self.date < datetime.date.today()

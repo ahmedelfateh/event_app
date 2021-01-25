@@ -7,6 +7,9 @@ from app.users.tests.factories import UserFactory
 
 
 class EventFactory(DjangoModelFactory):
+    """[summary]
+    Create fake event for test
+    """
 
     owner = SubFactory(UserFactory)
     title = Sequence(lambda n: "event {0}".format(n))

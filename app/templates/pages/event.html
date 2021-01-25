@@ -26,6 +26,7 @@
   {% endif %} 
   {% if request.user.is_authenticated %}
   {% if request.user in event.participants_users %}
+  {%if not event.done_event%}
   <a
     class="btn btn-primary"
     href="{% url 'events:addparticipant' event.id %}"
@@ -39,6 +40,7 @@
     role="button"
     >Going</a
   >
+  {% endif %}
   {% endif %}
   {% endif %}
 </ul>

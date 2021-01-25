@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 volumes:
   postgres_data: {}
@@ -7,7 +7,7 @@ services:
   django:
     build:
       context: .
-      dockerfile: ./docker/django/Dockerfile
+      dockerfile: ./docker/Dockerfile
     image: events_django
     container_name: events_django
     depends_on:
@@ -31,19 +31,3 @@ services:
     environment:
       POSTGRES_USER: api
       POSTGRES_PASSWORD: api
-
-  # docs:
-  #   image: app_local_docs
-  #   container_name: docs
-  #   build:
-  #     context: .
-  #     dockerfile: ./docker/docs/Dockerfile
-  #   env_file:
-  #     - ./.envs/.local/.django
-  #   volumes:
-  #     - ./docs:/docs:z
-  #     - ./config:/app/config:z
-  #     - ./app:/app/app:z
-  #   ports:
-  #     - "7000:7000"
-  #   command: /start-docs

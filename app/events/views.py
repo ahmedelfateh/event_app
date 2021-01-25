@@ -12,6 +12,15 @@ from .forms import EventForm
 
 
 class EventListView(ListView):
+    """[summary]
+    EventListView -> Event List
+
+    List all events data
+    Paginated 5
+
+    url: /
+    """
+
     model = Event
     paginate_by = 5
     ordering = ["-date"]
@@ -19,11 +28,28 @@ class EventListView(ListView):
 
 
 class EventDetailView(DetailView):
+    """[summary]
+    EventDetailView -> Event Detail
+
+    Event detail
+
+    url: /event/<int:pk>/
+    pk = event.id
+    """
+
     model = Event
     template_name = "pages/event.html"
 
 
 class EventCreateView(LoginRequiredMixin, CreateView):
+    """[summary]
+    EventCreateView -> Event Create
+
+    Create new Event
+
+    url: /event/add/
+    """
+
     model = Event
     template_name = "pages/add_event.html"
     form_class = EventForm
@@ -44,9 +70,25 @@ class EventCreateView(LoginRequiredMixin, CreateView):
 
 @login_required
 def AddParticipant(request, pk):
+    """[summary]
+    AddParticipant
+
+    User can goto to Event
+    User can Ignore Event
+
+    url: addparticipant/<int:pk>/
+    pk = event.id
+    """
+
     event = get_object_or_404(Event, id=pk)
-    is_here = event.participants.filter(id=request.user.id)
-    if is_here:
+    participated = event.participants.filter(id=request.user.id)
+    if event.done_event:
+        messages.warning(
+            request, f"Sorry, {event.title} is already take place in {event.date}"
+        )
+        return redirect("home")
+
+    if participated:
         event.participants.remove(request.user)
         messages.warning(request, f"You withdrawed {event.title}")
     else:
@@ -59,6 +101,15 @@ def AddParticipant(request, pk):
 
 @login_required
 def EventUpdateView(request, pk):
+    """[summary]
+    EventUpdateView -> Event Update
+
+    Update new Event
+
+    url: /event/update/<int:pk>/
+    pk = event.id
+    """
+
     event = Event.objects.get(id=pk)
     if request.user != event.owner:
         return redirect("events:add")
@@ -82,6 +133,15 @@ def EventUpdateView(request, pk):
 
 @login_required
 def EventDeleteView(request, pk):
+    """[summary]
+    EventDeleteView -> Event Delete
+
+    Update new Event
+
+    url: /event/delete/<int:pk>/
+    pk = event.id
+    """
+
     event = Event.objects.get(id=pk)
     if request.user != event.owner:
         return redirect("events:add")
